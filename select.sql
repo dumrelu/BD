@@ -142,3 +142,10 @@ SELECT f.id_furnizor "ID", f.nume_furnizor "Nume furnizor", tf.descriere "Tip fu
 FROM furnizori f, tipuri_furnizori tf, adrese a, orase o
 WHERE f.id_tip=tf.id_tip AND f.id_adresa=a.id_adresa AND a.id_oras=o.id_oras
 ORDER BY "Incasari totale(RON)" DESC;
+
+18.Informatii despre vanzarile zilnice:
+=======================================
+SELECT vz.id_vanzare "ID vanzare", v.nume_vanzator||' '||v.prenume_vanzator "Nume vanzator" ,vz.data "Data", vz.incasari "Incasari(RON)", 
+(SELECT COUNT(*) FROM fructe_vandute WHERE id_vanzare=vz.id_vanzare) "Numar fructe vandute"
+FROM vanzari_zilnice vz, vanzatori v
+WHERE v.id_vanzator=vz.id_vanzator ORDER BY "Nume vanzator" ASC, "Data" ASC;
